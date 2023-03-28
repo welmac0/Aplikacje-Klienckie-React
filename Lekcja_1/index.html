@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            display: flex;
+        }
+
+        .klasa1 {
+            color: red;
+        }
+
+        .container {
+            margin: 2px;
+            display: flex;
+
+            border: 3px solid red;
+            flex-direction: row;
+        }
+
+        .table {
+            margin: 2px;
+            display: flex;
+
+            border: 3px solid yellow;
+            flex-direction: row;
+        }
+
+        .column {
+            margin: 2px;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid gray;
+        }
+
+        .square {
+            width: 80px;
+            height: 80px;
+            margin: 2px;
+            display: flex;
+            background-color: magenta;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="react-app"></div>
+</body>
+
+</html>
+<script defer type="text/babel">
+    // Zad 1
+    // class Start extends React.Component {
+    //     render() {
+    //         return (
+    //             <h1 className="klasa1"> React Component </h1>
+    //         )
+    //     }
+    // }
+
+    // ReactDOM.render(
+    //     <Start />,
+    //     document.getElementById('react-app')
+    // )
+
+    //Zad 2 zmienne w komponencie
+    // class Start extends React.Component { //klasa reacta
+    //     render() { //constructor
+    //         let place = 'some place'
+    //         let info = 'some info' //dane 
+    //         return (
+    //             <h1> Hello {place} {info} </h1> //zwrocenie jako obiekt 
+    //         )
+    //     }
+    // }
+
+    // ReactDOM.render(
+    //     <><Start /><Start /><Start /></>, //3 obiekty dom zagniezdzone w jednym
+    //     document.getElementById('react-app') //gdzie ma byc
+    // )
+
+    //Zad 3 style inline
+    // class Start extends React.Component { //klasa reacta
+    //     render() { //constructor
+    //         let place = 'some place'
+    //         let info = 'some info' //dane 
+    //         return (
+    //             <h1 style={{ width: "100px", height: "100px", backgroundColor: "red", marginTop: "100px" }}> Hello {place} {info} </h1> //zwrocenie jako obiekt 
+    //         )
+    //     }
+    // }
+
+    // ReactDOM.render(
+    //     <><Start /><Start /><Start /></>, //3 obiekty dom zagniezdzone w jednym
+    //     document.getElementById('react-app') //gdzie ma byc
+    // )
+
+    //Zad 4
+
+    // class List extends React.Component {
+    //     render() {
+    //         let dane = [{
+    //             id: 1,
+    //             quantity: 1,
+    //             name: "masło"
+    //         },
+    //         {
+    //             id: 2,
+    //             quantity: 6,
+    //             name: "mleko"
+    //         },
+    //         {
+    //             id: 3,
+    //             quantity: 2,
+    //             name: "chleb"
+    //         }]
+    //         return ( // komponenty glowne
+    //             <>
+    //                 <ListItem quantity={dane[0].quantity} name={dane[0].name} />
+    //                 <ListItem quantity={dane[1].quantity} name={dane[1].name} />
+    //                 <ListItem quantity={dane[2].quantity} name={dane[2].name} />
+    //             </>
+    //         )
+    //     }
+    // }
+
+    // class List2 extends React.Component {
+    //     render() {
+    //         let dane = [{
+    //             id: 1,
+    //             quantity: 1,
+    //             name: "masło"
+    //         },
+    //         {
+    //             id: 2,
+    //             quantity: 6,
+    //             name: "mleko"
+    //         },
+    //         {
+    //             id: 3,
+    //             quantity: 2,
+    //             name: "chleb"
+    //         }]
+    //         let doneArray = []
+    //         for (let i = 0; i < dane.length; i++) {
+    //             doneArray.push(<ListItem quantity={dane[i].quantity} name={dane[i].name} key={i} />)
+    //         }
+    //         return (
+    //             doneArray
+    //         )
+    //     }
+    // }
+
+    // właściwości z komponentu nadrzędnego odczytujemy w podrzędnym jak poniżej
+    // this.props.nazwawlasciwosci
+
+    // class ListItem extends React.Component {
+    //     render() {
+    //         console.log(this.props) // komponent wenetrzny
+    //         return (
+    //             <>
+    //                 {this.props.quantity} x {this.props.name}
+    //             </>
+    //         )
+    //     }
+    // }
+
+    // ReactDOM.render(
+    //     <List2 />,
+    //     document.getElementById('react-app')
+    // )
+
+    // index7
+    class Box extends React.Component {
+        render() {
+            let dane = [
+                {
+                    id: 1,
+                    czynnosc: 'kupic',
+                    produkt: 'maslo',
+                    ilosc: 2,
+                    bg: 'yellow',
+                    firstDiv: 'blue',
+                    secondDiv: 'red',
+                    thirdDiv: 'black'
+                },
+                {
+                    id: 2,
+                    czynnosc: 'wylac',
+                    produkt: 'mleko',
+                    ilosc: 6,
+                    bg: 'yellow',
+                    firstDiv: 'black',
+                    secondDiv: 'red',
+                    thirdDiv: 'green'
+                },
+                {
+                    id: 3,
+                    czynnosc: 'upiec',
+                    produkt: 'chleb',
+                    ilosc: 3,
+                    bg: 'yellow',
+                    firstDiv: 'blue',
+                    secondDiv: 'red',
+                    thirdDiv: 'green'
+                },
+            ]
+            let doneArray = dane.map((value, key) => {
+                return (<BoxItem key={key} id={value.id} gora={value.firstDiv} srodek={value.secondDiv} dol={value.thirdDiv} czynnosc={value.czynnosc} ile={value.ilosc} co={value.produkt} bg={value.bg} />)
+            })
+            console.log(doneArray)
+            return (doneArray)
+        }
+
+    }
+
+    class BoxItem extends React.Component {
+        render() {
+            const { id, gora, srodek, dol, czynnosc, ile, co, bg } = this.props; //pamietac o tym!!!
+            return (
+                <div style={{ width: "300px", height: "300px", backgroundColor: bg, color: "white", padding: "2%", margin: "3%", float: 'left' }}>
+                    <div style={{ width: "80%", height: "10%", margin: "10%", backgroundColor: gora }}>
+                        id: {id}
+                    </div>
+                    <div style={{ width: "80%", height: "40%", margin: "10%", backgroundColor: srodek }}>
+                        zadanie: <br />
+                        {czynnosc} -{'>'} {co}
+                    </div>
+                    <div style={{ width: "80%", height: "10%", margin: "10%", backgroundColor: dol }}>
+                        ile: {ile}
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Box />,
+        document.getElementById('react-app')
+    )
+
+    // index 8
+    // image, imageList
+    // box = list
+    // const imagesData = [
+    //     { id: 1, name: "hamlet" },
+    //     { id: 2, name: "krzyzacy" },
+    //     { id: 3, name: "lalka" },
+    // ]
+
+    // class ImageList extends React.Component {
+    //     render() {
+    //         const imagesData = [
+    //             { id: 1, name: "hamlet" },
+    //             { id: 2, name: "krzyzacy" },
+    //             { id: 3, name: "lalka" },
+    //         ]
+
+    //         let doneArray = imagesData.map((value, key) => {
+    //             return (<Image key={key} id={value.id} name={value.name} />)
+    //         })
+    //         return doneArray
+    //     }
+    // }
+
+    // class Image extends React.Component {
+    //     render() {
+    //         console.log(this.props) //to jest przekazana wyzej tablica
+    //         const { key, id, name } = this.props
+    //         return (
+    //             <div style={{ float: 'left', width: "300px", height: "300px", backgroundColor: 'red', margin: '30px', padding: '20px 20px 20px 5px' }}>
+    //                 <img src={this.makeImageUrl(name)} width='80%' height='80%' /> <br />
+    //                 {this.makeImageName(name)}
+    //             </div>
+    //         )
+    //     }
+
+    //     makeImageName(string) {
+    //         return string.charAt(0).toUpperCase() + string.slice(1)
+    //     }
+
+    //     makeImageUrl(string) {
+    //         return ('/Users/mwelpa/Documents/ZSŁ/React/gfx/' + string + '.jpeg')
+    //     }
+    // }
+
+    // ReactDOM.render(
+    //     <ImageList />,
+    //     document.getElementById('react-app')
+    // )
+
+    //index 9
+    //square, column, table, container
+    // class Container extends React.Component {
+    //     render() {
+    //         return (
+    //             <div className='container'>
+    //                 <Table />
+    //                 <Table />
+    //                 <Table />
+    //             </div>
+    //         )
+    //     }
+    // }
+
+    // class Table extends React.Component {
+    //     render() {
+    //         return (
+    //             <div className='table'>
+    //                 <Column />
+    //                 <Column />
+    //                 <Column />
+    //             </div>
+    //         )
+    //     }
+    // }
+
+    // class Column extends React.Component {
+    //     render() {
+    //         return (
+    //             <div className='column'>
+    //                 <Square />
+    //                 <Square />
+    //                 <Square />
+    //             </div>
+    //         )
+    //     }
+    // }
+
+    // class Square extends React.Component {
+    //     render() {
+    //         return (
+    //             <div className='square'>
+    //                 REACT COMP
+    //             </div>
+    //         )
+    //     }
+    // }
+
+    // ReactDOM.render(
+    //     <Container />,
+    //     document.getElementById('react-app')
+    // )
+
+    //index 10
+    // import dane from './export'
+</script>

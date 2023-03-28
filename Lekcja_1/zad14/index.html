@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie Sklep</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .bluebox {
+            position: relative;
+            margin: 10px;
+            background-color: lightblue;
+            color: white;
+            width: 100px;
+            float: left;
+            height: 200px;
+        }
+
+        .stars {
+            position: absolute;
+            background-color: gray;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .inside {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    10: fetch json data from server and make images list
+    <div id="react-app"></div>
+</body>
+
+</html>
+<script type="text/babel">
+    var dane;
+    window.onload = () => {
+        fetch('/sklep')
+            .then((res) => res.json())
+            .then((data) => {
+                dane = data['items']
+                console.log(dane['items'])
+                generate(dane)
+            })
+    }
+    function generate(dane) {
+        class BlueBoxList extends React.Component {
+            render() {
+                console.log('chuj');
+                let doneArray = dane.map((value, key) => {
+                    return (<BlueBoxItem key={key} cat={value.category} id={value.id} starurl={value.img_url} slogan={value.slogan} stars={value.stars} title={value.title} price={value.price} img={value.product_url} />)
+                })
+                // Return the array of BlueBoxItem components
+                return doneArray
+            }
+        }
+
+        class BlueBoxItem extends React.Component {
+            render() {
+                const { cat, id, img, slogan, stars, title, price, starurl } = this.props
+                const starImages = []
+
+                for (let i = 0; i < stars; i++) {
+                    starImages.push(<img src={starurl} alt="star" width='20px' height='20px' />);
+                }
+                return (
+                    <div className='bluebox'>
+                        <div className='inside'>
+                            <b>{title}</b> <br />
+                            <img src={img} height='50px' width='20px' />
+                            price: <br />
+                            {price}
+                        </div>
+                        <div className='stars'>
+                            {starImages}
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <BlueBoxList />,
+            document.getElementById('react-app')
+        )
+    }
+</script>
