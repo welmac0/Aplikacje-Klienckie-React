@@ -60,13 +60,13 @@
 </html>
 <script defer type="text/babel">
     // Zad 1
-    // class Start extends React.Component {
-    //     render() {
-    //         return (
-    //             <h1 className="klasa1"> React Component </h1>
-    //         )
-    //     }
-    // }
+    class Start extends React.Component {
+        render() {
+            return (
+                <h1 className="klasa1"> React Component </h1>
+            )
+        }
+    }
 
     // ReactDOM.render(
     //     <Start />,
@@ -74,15 +74,15 @@
     // )
 
     //Zad 2 zmienne w komponencie
-    // class Start extends React.Component { //klasa reacta
-    //     render() { //constructor
-    //         let place = 'some place'
-    //         let info = 'some info' //dane 
-    //         return (
-    //             <h1> Hello {place} {info} </h1> //zwrocenie jako obiekt 
-    //         )
-    //     }
-    // }
+    class Start extends React.Component { //klasa reacta
+        render() { //constructor
+            let place = 'some place'
+            let info = 'some info' //dane 
+            return (
+                <h1> Hello {place} {info} </h1> //zwrocenie jako obiekt 
+            )
+        }
+    }
 
     // ReactDOM.render(
     //     <><Start /><Start /><Start /></>, //3 obiekty dom zagniezdzone w jednym
@@ -90,15 +90,15 @@
     // )
 
     //Zad 3 style inline
-    // class Start extends React.Component { //klasa reacta
-    //     render() { //constructor
-    //         let place = 'some place'
-    //         let info = 'some info' //dane 
-    //         return (
-    //             <h1 style={{ width: "100px", height: "100px", backgroundColor: "red", marginTop: "100px" }}> Hello {place} {info} </h1> //zwrocenie jako obiekt 
-    //         )
-    //     }
-    // }
+    class Start extends React.Component { //klasa reacta
+        render() { //constructor
+            let place = 'some place'
+            let info = 'some info' //dane 
+            return (
+                <h1 style={{ width: "100px", height: "100px", backgroundColor: "red", marginTop: "100px" }}> Hello {place} {info} </h1> //zwrocenie jako obiekt 
+            )
+        }
+    }
 
     // ReactDOM.render(
     //     <><Start /><Start /><Start /></>, //3 obiekty dom zagniezdzone w jednym
@@ -107,73 +107,73 @@
 
     //Zad 4
 
-    // class List extends React.Component {
-    //     render() {
-    //         let dane = [{
-    //             id: 1,
-    //             quantity: 1,
-    //             name: "masło"
-    //         },
-    //         {
-    //             id: 2,
-    //             quantity: 6,
-    //             name: "mleko"
-    //         },
-    //         {
-    //             id: 3,
-    //             quantity: 2,
-    //             name: "chleb"
-    //         }]
-    //         return ( // komponenty glowne
-    //             <>
-    //                 <ListItem quantity={dane[0].quantity} name={dane[0].name} />
-    //                 <ListItem quantity={dane[1].quantity} name={dane[1].name} />
-    //                 <ListItem quantity={dane[2].quantity} name={dane[2].name} />
-    //             </>
-    //         )
-    //     }
-    // }
+    class List extends React.Component {
+        render() {
+            let dane = [{
+                id: 1,
+                quantity: 1,
+                name: "masło"
+            },
+            {
+                id: 2,
+                quantity: 6,
+                name: "mleko"
+            },
+            {
+                id: 3,
+                quantity: 2,
+                name: "chleb"
+            }]
+            return ( // komponenty glowne
+                <>
+                    <ListItem quantity={dane[0].quantity} name={dane[0].name} />
+                    <ListItem quantity={dane[1].quantity} name={dane[1].name} />
+                    <ListItem quantity={dane[2].quantity} name={dane[2].name} />
+                </>
+            )
+        }
+    }
 
-    // class List2 extends React.Component {
-    //     render() {
-    //         let dane = [{
-    //             id: 1,
-    //             quantity: 1,
-    //             name: "masło"
-    //         },
-    //         {
-    //             id: 2,
-    //             quantity: 6,
-    //             name: "mleko"
-    //         },
-    //         {
-    //             id: 3,
-    //             quantity: 2,
-    //             name: "chleb"
-    //         }]
-    //         let doneArray = []
-    //         for (let i = 0; i < dane.length; i++) {
-    //             doneArray.push(<ListItem quantity={dane[i].quantity} name={dane[i].name} key={i} />)
-    //         }
-    //         return (
-    //             doneArray
-    //         )
-    //     }
-    // }
+    class List2 extends React.Component {
+        render() {
+            let dane = [{
+                id: 1,
+                quantity: 1,
+                name: "masło"
+            },
+            {
+                id: 2,
+                quantity: 6,
+                name: "mleko"
+            },
+            {
+                id: 3,
+                quantity: 2,
+                name: "chleb"
+            }]
+            let doneArray = []
+            for (let i = 0; i < dane.length; i++) {
+                doneArray.push(<ListItem quantity={dane[i].quantity} name={dane[i].name} key={i} />)
+            }
+            return (
+                doneArray
+            )
+        }
+    }
 
     // właściwości z komponentu nadrzędnego odczytujemy w podrzędnym jak poniżej
     // this.props.nazwawlasciwosci
 
-    // class ListItem extends React.Component {
-    //     render() {
-    //         console.log(this.props) // komponent wenetrzny
-    //         return (
-    //             <>
-    //                 {this.props.quantity} x {this.props.name}
-    //             </>
-    //         )
-    //     }
-    // }
+    class ListItem extends React.Component {
+        render() {
+            console.log(this.props) // komponent wenetrzny
+            return (
+                <>
+                    {this.props.quantity} x {this.props.name}
+                </>
+            )
+        }
+    }
 
     // ReactDOM.render(
     //     <List2 />,
@@ -253,47 +253,47 @@
     // index 8
     // image, imageList
     // box = list
-    // const imagesData = [
-    //     { id: 1, name: "hamlet" },
-    //     { id: 2, name: "krzyzacy" },
-    //     { id: 3, name: "lalka" },
-    // ]
+    const imagesData = [
+        { id: 1, name: "hamlet" },
+        { id: 2, name: "krzyzacy" },
+        { id: 3, name: "lalka" },
+    ]
 
-    // class ImageList extends React.Component {
-    //     render() {
-    //         const imagesData = [
-    //             { id: 1, name: "hamlet" },
-    //             { id: 2, name: "krzyzacy" },
-    //             { id: 3, name: "lalka" },
-    //         ]
+    class ImageList extends React.Component {
+        render() {
+            const imagesData = [
+                { id: 1, name: "hamlet" },
+                { id: 2, name: "krzyzacy" },
+                { id: 3, name: "lalka" },
+            ]
 
-    //         let doneArray = imagesData.map((value, key) => {
-    //             return (<Image key={key} id={value.id} name={value.name} />)
-    //         })
-    //         return doneArray
-    //     }
-    // }
+            let doneArray = imagesData.map((value, key) => {
+                return (<Image key={key} id={value.id} name={value.name} />)
+            })
+            return doneArray
+        }
+    }
 
-    // class Image extends React.Component {
-    //     render() {
-    //         console.log(this.props) //to jest przekazana wyzej tablica
-    //         const { key, id, name } = this.props
-    //         return (
-    //             <div style={{ float: 'left', width: "300px", height: "300px", backgroundColor: 'red', margin: '30px', padding: '20px 20px 20px 5px' }}>
-    //                 <img src={this.makeImageUrl(name)} width='80%' height='80%' /> <br />
-    //                 {this.makeImageName(name)}
-    //             </div>
-    //         )
-    //     }
+    class Image extends React.Component {
+        render() {
+            console.log(this.props) //to jest przekazana wyzej tablica
+            const { key, id, name } = this.props
+            return (
+                <div style={{ float: 'left', width: "300px", height: "300px", backgroundColor: 'red', margin: '30px', padding: '20px 20px 20px 5px' }}>
+                    <img src={this.makeImageUrl(name)} width='80%' height='80%' /> <br />
+                    {this.makeImageName(name)}
+                </div>
+            )
+        }
 
-    //     makeImageName(string) {
-    //         return string.charAt(0).toUpperCase() + string.slice(1)
-    //     }
+        makeImageName(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1)
+        }
 
-    //     makeImageUrl(string) {
-    //         return ('/Users/mwelpa/Documents/ZSŁ/React/gfx/' + string + '.jpeg')
-    //     }
-    // }
+        makeImageUrl(string) {
+            return ('/Users/mwelpa/Documents/ZSŁ/React/gfx/' + string + '.jpeg')
+        }
+    }
 
     // ReactDOM.render(
     //     <ImageList />,
@@ -301,52 +301,52 @@
     // )
 
     //index 9
-    //square, column, table, container
-    // class Container extends React.Component {
-    //     render() {
-    //         return (
-    //             <div className='container'>
-    //                 <Table />
-    //                 <Table />
-    //                 <Table />
-    //             </div>
-    //         )
-    //     }
-    // }
+    square, column, table, container
+    class Container extends React.Component {
+        render() {
+            return (
+                <div className='container'>
+                    <Table />
+                    <Table />
+                    <Table />
+                </div>
+            )
+        }
+    }
 
-    // class Table extends React.Component {
-    //     render() {
-    //         return (
-    //             <div className='table'>
-    //                 <Column />
-    //                 <Column />
-    //                 <Column />
-    //             </div>
-    //         )
-    //     }
-    // }
+    class Table extends React.Component {
+        render() {
+            return (
+                <div className='table'>
+                    <Column />
+                    <Column />
+                    <Column />
+                </div>
+            )
+        }
+    }
 
-    // class Column extends React.Component {
-    //     render() {
-    //         return (
-    //             <div className='column'>
-    //                 <Square />
-    //                 <Square />
-    //                 <Square />
-    //             </div>
-    //         )
-    //     }
-    // }
+    class Column extends React.Component {
+        render() {
+            return (
+                <div className='column'>
+                    <Square />
+                    <Square />
+                    <Square />
+                </div>
+            )
+        }
+    }
 
-    // class Square extends React.Component {
-    //     render() {
-    //         return (
-    //             <div className='square'>
-    //                 REACT COMP
-    //             </div>
-    //         )
-    //     }
-    // }
+    class Square extends React.Component {
+        render() {
+            return (
+                <div className='square'>
+                    REACT COMP
+                </div>
+            )
+        }
+    }
 
     // ReactDOM.render(
     //     <Container />,

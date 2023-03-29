@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="react-app"></div>
+</body>
+
+</html>
+<script defer type="text/babel">
+    //index 1
+
+    class Square extends React.Component {
+        constructor() {
+            super() // ta funkcja wywoluje konstruktor klasy nadrzednej (React.Component)
+            this.state = { a: 1, b: 2 }
+        }
+
+        render() {
+            return (
+                <button onClick={this.changeState}>
+                    a = {this.state.a} b = {this.state.b}
+                </button>
+            )
+        }
+
+        changeState = () => {
+            this.setState({
+                a: Math.random() * 100,
+                b: Math.random() * 100
+            })
+        }
+    }
+
+    class SquareFunction extends React.Component {
+        constructor() {
+            super()
+            this.state = { miasto: 'Kraków' }
+        }
+        // zwykła funkcja
+
+        // clickMe2(param) {
+        //     console.log(param)
+        //     this.setState({
+        //         miasto: param
+        //     })
+        // }
+
+        // render() {
+        //     return <button onClick={this.clickMe2.bind(this, 'Warszawa')}>{this.state.miasto}</button>;
+        // }
+
+        // strzałkowa
+
+        clickMe = (param) => {
+            console.log(this.state.miasto);
+            this.setState({
+                miasto: param
+            })
+        }
+
+        render() {
+            return <button onClick={() => this.clickMe("Warszawa")}>{this.state.miasto}</button>;
+        }
+    }
+
+    class Clock extends React.Component {
+        // zdarzenie cos na wzor window.onload()
+        componentDidMount() {
+            // fetch danych
+            fetch()
+        }
+    }
+
+    class Test extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                x: false
+            }
+        }
+
+
+        componentDidMount() {
+            console.log('initial state ->' + this.state.x) // 1.
+            this.setState({
+                x: true
+            },
+                () => console.log('state already updated ->' + this.state.x) // 3.
+            )
+            console.log('state not updated yet ->' + this.state.x) // 2.
+        }
+
+        render() {
+            return (
+                <div>
+                    elo
+                </div>
+            )
+        }
+    }
+
+
+    // class Container extends React.Component {
+    //     render() {
+    //         return (
+    //             <div>
+    //                 <Square />
+    //                 <SquareFunction />
+    //                 <Test />
+    //             </div>
+    //         )
+    //     }
+    // }
+
+    // ReactDOM.render(
+    //     <Container />,
+    //     document.getElementById('react-app')
+    // )
+
+    // cw 1
+    class Square1 extends React.Component {
+        constructor() {
+            super()
+            this.state = { a: 1, b: 2, c: 3, }
+        }
+
+        render() {
+            return (
+                <h1>a = {this.state.a}</h1>
+            )
+        }
+    }
+
+    // cw 2
+    class Square2 extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                stan: '',
+            }
+        }
+
+        changeState = () => {
+            if (this.state.stan == '') {
+                this.setState({
+                    stan: 'klikniete'
+                })
+            } else (
+                console.log('Juz klikniete wczesniej!')
+            )
+        }
+
+        render() {
+            return (
+                <button onClick={this.changeState}>klik: {this.state.stan}</button>
+            )
+        }
+    }
+
+    //cw3
+    class FoodList extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                foods: ["masło", "mleko", "chleb", "dżem"],
+                randomFood: ''
+            }
+        }
+
+        componentDidMount() {
+            this.setState({ randomFood: this.state.foods[0] })
+        }
+
+        onButtonClick = () => {
+            const randomIndex = Math.floor(Math.random() * this.state.foods.length)
+            const randomFood = this.state.foods[randomIndex]
+            this.setState({ randomFood })
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>Food List</h1>
+                    <button onClick={this.onButtonClick}>Choose random food</button>
+                    <FoodItem food={this.state.randomFood} />
+                    <FoodItem food={this.state.randomFood} />
+                    <FoodItem food={this.state.randomFood} />
+                </div>
+            )
+        }
+
+
+    }
+
+    class FoodItem extends React.Component {
+        render() {
+            return (
+                <div>
+                    Food: {this.props.food}
+                </div>
+            )
+        }
+    }
+
+    //cw4
+
+    class FoodList2 extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                foods: ["masło", "mleko", "chleb", "dżem"],
+                randomFood: ''
+            }
+        }
+
+        componentDidMount() {
+            this.setState({ randomFood: this.state.foods[0] })
+        }
+
+        onButtonClick = () => {
+            const randomIndex = Math.floor(Math.random() * this.state.foods.length)
+            const randomFood = this.state.foods[randomIndex]
+            this.setState({ randomFood })
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>Food List</h1>
+                    <button onClick={this.onButtonClick}>Choose random food</button>
+                    <FoodItem2 food={this.state.randomFood} />
+                    <FoodItem2 food={this.state.randomFood} />
+                    <FoodItem2 food={this.state.randomFood} />
+                </div>
+            )
+        }
+
+
+    }
+
+    class FoodItem2 extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                stan: 'lubie',
+            }
+        }
+
+        changeState = () => {
+            if (this.state.stan == 'lubie') {
+                this.setState({
+                    stan: 'nie lubie'
+                })
+            } else {
+                this.setState({
+                    stan: 'lubie',
+                })
+            }
+        }
+
+        render() {
+            return (
+                <div>
+                    <button onClick={this.changeState}>{this.state.stan}</button>
+                    Food: {this.props.food}
+                </div>
+            )
+        }
+    }
+
+    // cw 5
+    class Parent extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                arr: ['hamburger', 'truffle']
+            };
+        }
+
+        doneArray = []
+        dodajTanie = () => {
+            this.setState((prevState) => ({
+                arr: [...prevState.arr, 'hamburger']
+            }));
+
+        }
+
+        dodajDrogie = () => {
+            this.setState((prevState) => ({
+                arr: [...prevState.arr, 'truffle']
+            }));
+        }
+
+
+
+        render() {
+            this.doneArray = this.state.arr.map((value, key) => {
+                return (<Child name={value} key={key} />)
+            })
+            return (
+
+                <div>
+                    Add Component <button onClick={this.dodajTanie}>dodaj tanie</button><button onClick={this.dodajDrogie}>dodaj drogie</button>
+                    {this.doneArray}
+                </div >
+
+            )
+        }
+    }
+
+    class Child extends React.Component {
+        render() {
+            return (
+                <div style={{ float: 'left', width: "100px", height: "100px", backgroundColor: 'red', margin: '30px', padding: '20px 20px 20px 5px' }}>
+                    <img src={this.makeImageUrl(this.props.name)} width='80%' height='80%' /> <br />
+                    {this.props.name}
+                </div>
+            )
+        }
+
+        makeImageUrl(string) {
+            return ('/Users/mwelpa/Documents/ZSŁ/React/Aplikacje-Klienckie-React/Lekcja_2/static/' + string + '.jpeg')
+        }
+    }
+
+    // cw6
+    class Parent6 extends React.Component {
+        constructor() {
+            super()
+            var randomColor = Math.floor(Math.random() * 16777215).toString(16); //# + randomColor
+            this.state = {
+                w: 100,
+                h: 100,
+                c: '#000000'
+            }
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>cw 06: React state - random style</h1>
+                    <Button state={this.state} />
+                    <Button state={this.state} />
+                    <Button state={this.state} />
+                </div>
+            )
+        }
+    }
+
+
+
+    class Button extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                w: this.props.state.w,
+                h: this.props.state.h,
+                c: this.props.state.c,
+            }
+        }
+        render() {
+            return (
+                <div style={{
+                    float: 'left',
+                    width: this.state.w + 'px',
+                    height: this.state.h + 'px',
+                    backgroundColor: this.state.c,
+                    margin: '30px',
+                    padding: '20px 20px 20px 5px'
+                }}
+                >
+                    <button onClick={this.randomGen}>RANDOM</button>
+                    w: {this.state.w},<br/>
+                    h: {this.state.h}, <br/>
+                    c: {this.state.c}, <br/>             
+                </div>
+            )
+        }
+
+        randomGen = () => {
+            this.setState({
+                w: Math.floor(Math.random() * (200 - 30 + 1) + 30),
+                h: Math.floor(Math.random() * (200 - 30 + 1) + 30),
+                c: '#' + Math.floor(Math.random() * 16777215).toString(16),
+            })
+        }
+    }
+
+    //cw 7
+
+
+    class Container extends React.Component {
+        render() {
+            return (
+                <div>
+                    <Parent6 />
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Container />,
+        document.getElementById('react-app')
+    )
+</script>
