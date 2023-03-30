@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie Sklep</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dot {
+            height: 300px;
+            width: 300px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    09: React state - time zones
+    <div id="react-app"></div>
+</body>
+
+</html>
+<script type="text/babel">
+    var dane;
+    window.onload = () => {
+        fetch('/zones')
+            .then((res) => res.json())
+            .then((data) => {
+                dane = data
+                generateClocks(dane)
+            })
+    }
+    function generateClocks(dane) {
+        class ZonesList extends React.Component {
+            constructor() {
+                super()
+                this.state = {
+                    transitArray: []
+                }
+            }
+            render() {
+                let doneArray = dane.map((value, key) => {
+
+                    return (<ZonesItem key={key} name={value.value} offset={value.offset} transitArray={this.state.transitArray} />)
+                })
+
+                return (
+                    <div>
+                        <button onClick={() => {
+                            this.sendTransitArray()
+                            window.location.href = '/page2'
+
+                        }}>Show saved timezones</button>
+                        {doneArray}
+                    </div>
+                )
+            }
+
+            sendTransitArray = () => {
+                console.log(this.state.transitArray)
+                fetch('/transferData', {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(this.state.transitArray) // dowolne dane przesyłane postem
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        console.log(json) // odpowiedź json z serwera                       
+                    });
+            }
+
+
+        }
+
+        class ZonesItem extends React.Component {
+            constructor(props) {
+                super(props)
+                const { name, offset } = this.props
+                this.state = {
+                    offset: offset,
+                    name: name,
+                    time: 0
+                }
+            }
+
+            render() {
+                return (
+                    <div className='dot'>
+                        {this.state.name} <br />
+                        {this.state.time} <br />
+                        <button onClick={this.OnClickEvent}>Add</button>
+                    </div>
+                )
+            }
+
+            OnClickEvent = () => {
+                let obj = {
+                    name: this.state.name,
+                    time: this.state.time
+                }
+                this.props.transitArray.push(obj)
+                console.log(this.props.transitArray)
+            }
+
+            displayLocalTime = () => {
+                const utcTime = new Date()
+                const offsetTime = utcTime.getTime() + this.state.offset * 3600000
+                const localTime = new Date(offsetTime)
+                const timeString = localTime.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric' })
+                this.setState({
+                    time: timeString
+                })
+            }
+
+            componentDidMount() {
+                this.displayLocalTime;
+                setInterval(this.displayLocalTime, 1000);
+            }
+
+        }
+
+        class Container extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <ZonesList />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Container />,
+            document.getElementById('react-app')
+        )
+    }
+</script>

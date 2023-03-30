@@ -10,7 +10,14 @@
     <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
-
+        .dot {
+            height: 80px;
+            width: 80px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 30px;
+        }
     </style>
 </head>
 
@@ -383,9 +390,9 @@
                 }}
                 >
                     <button onClick={this.randomGen}>RANDOM</button>
-                    w: {this.state.w},<br/>
-                    h: {this.state.h}, <br/>
-                    c: {this.state.c}, <br/>             
+                    w: {this.state.w},<br />
+                    h: {this.state.h}, <br />
+                    c: {this.state.c}, <br />
                 </div>
             )
         }
@@ -400,13 +407,92 @@
     }
 
     //cw 7
+    class Timer extends React.Component {
+        constructor() {
+            super()
+            this.state = { time: 5 }
+        }
 
+        render() {
+            return (
+                <div className="dot">
+                    {this.state.time}
+                    <button onClick={this.onButtonClick}>click</button>
+                </div>
+            )
+        }
+
+        startTime = () => {
+            this.setState({
+                time: this.state.time - 1
+            })
+            if (this.state.time == 0) {
+                clearInterval(this.intervalId)
+            }
+        }
+
+        onButtonClick = () => {
+            this.intervalId = setInterval(this.startTime, 1000)
+        }
+    }
+
+    //cw 8
+    class Stoper extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                time: 0,
+                flag: false,
+            }
+        }
+
+        render() {
+            return (
+                <div className="dot">
+                    {this.state.time}
+                    {this.state.flag}
+                    <button onClick={this.onButtonClick}>click</button>
+
+                </div>
+            )
+        }
+
+        startTime = () => {
+            if (this.state.flag == true) {
+                this.setState({
+                    time: this.state.time + 1
+                })
+            }
+
+
+        }
+
+        onButtonClick = () => {
+            if (this.state.flag == false) {
+                this.setState({ flag: true })
+            } else {
+                this.setState({ flag: false })
+            }
+            console.log(this.state)
+
+            if (this.state.time == 0) {
+                this.intervalId = setInterval(this.startTime, 1000)
+            }
+        }
+    }
+
+    // cw 9
+    class ZonesList extends React.Component {
+        
+    }
 
     class Container extends React.Component {
         render() {
             return (
                 <div>
-                    <Parent6 />
+                    <Stoper />
+                    <Stoper />
+                    <Stoper />
                 </div>
             )
         }
