@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dot {
+            height: 80px;
+            width: 80px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="react-app"></div>
+</body>
+
+</html>
+<script defer type="text/babel">
+
+    //cw1
+    class MyFormExample extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                data: '',
+                status: 'niewyslane',
+            }
+        }
+
+        render() {
+            return (
+                <div><form onSubmit={this.handleSubmit}>
+                    <input type="text" value={this.state.data} onChange={this.handleChange} />
+                    <input type="submit" value="send" />
+                </form>
+                    data: {this.state.data}
+                    status: {this.state.status}
+                </div>
+
+
+            )
+        }
+
+        handleChange = (event) => { //handle change sie wykonuje gdy zmienia sie zawartosc pola tekstowego
+            this.setState({ data: event.target.value }); //event tutaj to nowa wartosc pola tekstowego, przez co myform jest generowany z setstate
+            console.log(this.state.data)
+        }
+
+        handleSubmit = (event) => { //on submit wykonuje sie gdy formularz jest wysylany
+            this.setState({
+                data: "",
+                status: 'wyslane',
+            })
+            //blokada przed wysłaniem formularza
+            event.preventDefault(); //zapobiec domyślnej akcji przeglądarki, która polega na ponownym ładowaniu strony po przesłaniu formularza.
+        }
+    }
+
+    //cw 2
+
+    class MyForm extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                array: [
+                    { id: 0, name: "hamlet" },
+                    { id: 1, name: "krzyzacy" },
+                    { id: 2, name: "lalka" }
+                ],
+                array2: [
+                    { id: 0, name: "Kraków" },
+                    { id: 1, name: "Warszawa" },
+                    { id: 2, name: "Gdańsk" },
+                    { id: 3, name: "Toruń" }
+                ],
+                arrayWybrane: []
+            };
+        }
+
+        onHandleSelect = (selectedOption) => {
+            this.setState({
+                arrayWybrane: [...this.state.arrayWybrane, selectedOption]
+            });
+        };
+
+        render() {
+            return (
+                <div>
+                    <form>
+                        <MySelect data={this.state.array} handleSelect={this.onHandleSelect} />
+                        <MySelect data={this.state.array2} handleSelect={this.onHandleSelect} />
+                    </form>
+                    wyslane:
+                    <ul>
+                        {this.state.arrayWybrane.map((option, index) => (
+                            <li key={index}>{option.name}</li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        }
+    }
+
+    class MySelect extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                options: [],
+                wybrane: ""
+            };
+        }
+
+        componentDidMount() {
+            this.updateOptions();
+        }
+
+        updateOptions = () => {
+            const options = this.props.data.map((option, key) => (
+                <option key={key} value={option.name}>
+                    {option.name}
+                </option>
+            ));
+            this.setState({ options });
+        };
+
+        render() {
+            return (
+                <div>
+                    <select onChange={this.onChange}>{this.state.options}</select>
+                    Wybrane z select: {this.state.wybrane}
+                </div>
+            );
+        }
+
+        onChange = (event) => {
+            const selectedOption = this.props.data.find(
+                (option) => option.name === event.target.value
+            );
+            console.log(selectedOption);
+            this.setState({ wybrane: selectedOption.name });
+            this.props.handleSelect(selectedOption);
+        };
+    }
+
+
+    class Container extends React.Component {
+        render() {
+            return (
+                <div>
+                    <MyForm />
+                    <MyForm />
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <Container />,
+        document.getElementById('react-app')
+    )
+</script>
