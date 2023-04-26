@@ -90,7 +90,9 @@
 
         onHandleSelect = (selectedOption) => {
             this.setState({
-                arrayWybrane: [...this.state.arrayWybrane, selectedOption]
+                arrayWybrane: [
+                    ...this.state.arrayWybrane,
+                    selectedOption]
             });
         };
 
@@ -153,13 +155,96 @@
         };
     }
 
+    // cw3
+    class MyForm3 extends React.Component {
+        constructor() {
+            super()
+            this.state = {
+                array: [
+                    { checked: false, value: 1 },
+                    { checked: false, value: 2 },
+                    { checked: false, value: 3 },
+                    { checked: false, value: 10 },
+                    { checked: false, value: 20 },
+                ],
+                suma: 0
+            }
+        }
 
+        updateSuma = (int) => {
+            this.setState({ suma: this.state.suma + int })
+        }
+
+        showSuma = () => {
+            alert("suma = " + this.state.suma)
+        }
+
+        render() {
+            let doneArray = this.state.array.map((value, key) => {
+                return (
+                    <div>
+                        <MyCheckBox3 key={key} checked={value.checked} value={value.value} f={this.updateSuma} />
+                    </div>
+                )
+            })
+
+            return (
+
+                <div>
+                    {doneArray}
+                    suma: {this.state.suma}
+                    <button onClick={this.showSuma}>SEND</button>
+                </div>
+            )
+        }
+    }
+
+    class MyCheckBox3 extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                type: 'checkbox',
+                value: props.value,
+                checked: props.checked,
+            }
+        }
+
+        onChangeCheckbox = (event) => {
+            let value = event.target.value
+            let checked = event.target.checked
+            this.setState({ checked: checked })
+            this.props.f(parseInt(value))
+        }
+
+        render() {
+            return (
+                <input type={this.state.type} value={this.state.value} checked={this.state.checked} onChange={this.onChangeCheckbox} />
+            )
+        }
+    }
+    
+    // cw 4
+    class MyForm4 extends React.Component {
+        constructor() {
+            super()
+            this.state = {}
+        }
+    }
+
+    class MyRadions4 extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                
+            }
+        }
+    }
+    
     class Container extends React.Component {
         render() {
             return (
                 <div>
-                    <MyForm />
-                    <MyForm />
+                    <MyForm3 />
                 </div>
             )
         }
